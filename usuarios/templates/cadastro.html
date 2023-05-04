@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block 'titulo' %} {% endblock %}
+
+{% block 'conteudo' %}
+
+<div class="container">
+  {% if status == '0' %}
+    <div class="alert alert-success" role="alert">
+      Usuário cadastrado com sucesso.
+    </div>
+  {% endif %}
+
+  {% if status == '1' %}
+    <div class="alert alert-danger" role="alert">
+      Nome e e-mail não podem estar vazios!
+    </div>
+  {% endif %}
+
+  {% if status == '2' %}
+    <div class="alert alert-danger" role="alert">
+      Não use senhas menores que 8 dígitos!
+    </div>
+  {% endif %}
+
+  {% if status == '3' %}
+    <div class="alert alert-danger" role="alert">
+      Usuário já cadastrado.
+    </div>
+  {% endif %}
+
+  {% if status == '4' %}
+    <div class="alert alert-danger" role="alert">
+      Ocorreu um erro interno em nosso sistema. Por favor, tente novamente mais tarde.
+    </div>
+  {% endif %}
+
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+      <div class="card shadow-lg border-0 rounded-lg mt-5">
+        <div class="card-header bg-dark text-light">
+          <h3 class="text-center font-weight-light my-4">Cadastre-se</h3>
+        </div>
+        <div class="card-body">
+          <form method="POST" action="{% url 'valida_cadastro' %}">
+            {% csrf_token %}
+            <div class="form-floating mb-3">
+              <input name="nome" class="form-control" type="text" placeholder="Nome...">
+              <label for="inputNome">Nome</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input name="email" class="form-control" type="text" placeholder="Email...">
+              <label for="inputEmail">Email</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input name="senha" class="form-control" type="password" placeholder="Senha...">
+              <label for="inputSenha">Senha</label>
+            </div>
+            <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+              <input class="btn btn-dark btn-lg" type="submit" value="Enviar">
+              <a class="btn btn-outline-secondary btn-lg" href="{% url 'login' %}">Login</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
