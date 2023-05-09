@@ -46,6 +46,7 @@ def valida_cadastro(request):
 def valida_login(request):
     email = request.POST.get('email')
     senha = request.POST.get('senha')
+    
 
     senha = sha256(senha.encode()).hexdigest()
 
@@ -56,7 +57,7 @@ def valida_login(request):
     
     elif len(usuario) > 0:
         request.session['usuario'] = usuario[0].id 
-        return redirect('/auth/login/?status=0')
+        return HttpResponse("LOGOU NESSA MERDA")
 
     
 
@@ -64,3 +65,4 @@ def sair(request):
     request.session.flush()
     return redirect('/auth/login/')
     
+ 

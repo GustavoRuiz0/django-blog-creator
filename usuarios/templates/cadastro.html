@@ -1,70 +1,49 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
-{% block 'titulo' %} {% endblock %}
+      <!-- Referência ao Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css" integrity="sha384-OgVRvuATP1zTzKjwKh/WWzKxh3+FdJlq0mW3XkIv+oPM7Pmwe6+YyydQ+Q6qz3qB" crossorigin="anonymous">
+</head>
+<body>
 
-{% block 'conteudo' %}
+  <style>
+    body{margin: 0;padding: 0;background: url(https://i.ibb.co/VQmtgjh/6845078.png) no-repeat;height: 100vh;font-family: sans-serif;background-size: cover;background-repeat: no-repeat;background-position: center;overflow: hidden}@media screen and (max-width: 600px;){body{background-size: cover;: fixed}}#particles-js{height: 100%}.loginBox{position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);width: 350px;min-height: 200px;background: #000000;border-radius: 10px;padding: 40px;box-sizing: border-box}.user{margin: 0 auto;display: block;margin-bottom: 20px}h3{margin: 0;padding: 0 0 20px;color: #59238F;text-align: center}.loginBox input{width: 100%;margin-bottom: 20px}.loginBox input[type="text"], .loginBox input[type="password"]{border: none;border-bottom: 2px solid #262626;outline: none;height: 40px;color: #fff;background: transparent;font-size: 16px;padding-left: 20px;box-sizing: border-box}.loginBox input[type="text"]:hover, .loginBox input[type="password"]:hover{color: #42F3FA;border: 1px solid #42F3FA;box-shadow: 0 0 5px rgba(0,255,0,.3), 0 0 10px rgba(0,255,0,.2), 0 0 15px rgba(0,255,0,.1), 0 2px 0 black}.loginBox input[type="text"]:focus, .loginBox input[type="password"]:focus{border-bottom: 2px solid #42F3FA}.inputBox{position: relative}.inputBox span{position: absolute;top: 10px;color: #262626}.loginBox input[type="submit"]{border: none;outline: none;height: 40px;font-size: 16px;background: #59238F;color: #fff;border-radius: 20px;cursor: pointer}.loginBox a{color: #262626;font-size: 14px;font-weight: bold;text-decoration: none;text-align: center;display: block}a:hover{color: #00ffff}p{color: #0000ff}
+  </style>
 
-<div class="container">
-  {% if status == '0' %}
-    <div class="alert alert-success" role="alert">
-      Usuário cadastrado com sucesso.
-    </div>
-  {% endif %}
-
-  {% if status == '1' %}
-    <div class="alert alert-danger" role="alert">
-      Nome e e-mail não podem estar vazios!
-    </div>
-  {% endif %}
-
-  {% if status == '2' %}
-    <div class="alert alert-danger" role="alert">
-      Não use senhas menores que 8 dígitos!
-    </div>
-  {% endif %}
-
-  {% if status == '3' %}
-    <div class="alert alert-danger" role="alert">
-      Usuário já cadastrado.
-    </div>
-  {% endif %}
-
-  {% if status == '4' %}
-    <div class="alert alert-danger" role="alert">
-      Ocorreu um erro interno em nosso sistema. Por favor, tente novamente mais tarde.
-    </div>
-  {% endif %}
-
-  <div class="row justify-content-center">
-    <div class="col-lg-6">
-      <div class="card shadow-lg border-0 rounded-lg mt-5">
-        <div class="card-header bg-dark text-light">
-          <h3 class="text-center font-weight-light my-4">Cadastre-se</h3>
-        </div>
-        <div class="card-body">
-          <form method="POST" action="{% url 'valida_cadastro' %}">
-            {% csrf_token %}
-            <div class="form-floating mb-3">
-              <input name="nome" class="form-control" type="text" placeholder="Nome...">
-              <label for="inputNome">Nome</label>
-            </div>
-            <div class="form-floating mb-3">
-              <input name="email" class="form-control" type="text" placeholder="Email...">
-              <label for="inputEmail">Email</label>
-            </div>
-            <div class="form-floating mb-3">
-              <input name="senha" class="form-control" type="password" placeholder="Senha...">
-              <label for="inputSenha">Senha</label>
-            </div>
-            <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-              <input class="btn btn-dark btn-lg" type="submit" value="Enviar">
-              <a class="btn btn-outline-secondary btn-lg" href="{% url 'login' %}">Login</a>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
+{% if status and status == '1' %}
+<div class="alert alert-danger" role="alert">
+    Usuário ou Senha inválidos
 </div>
+{% endif %}
 
-{% endblock %}
+{% if status and status == '2' %}
+<div class="alert alert-danger" role="alert">
+Tá tentando entrar pela url, PALHAÇO!
+</div>
+{% endif %}
+
+
+  <div class="loginBox"> <img class="user" src="https://i.ibb.co/yVGxFPR/2.png" height="100px" width="100px">
+        <h3>Sign in here</h3>
+        <form  method="POST" action="{% url 'valida_login' %}"> {%csrf_token %}
+            <div class="inputBox"> <input id="uname" type="text" name="email" placeholder="Email"> 
+            <div class="inputBox"> <input id="uname" type="text" name="email" placeholder="Email">
+            <input id="pass" type="password" name="senha" placeholder="Senha">
+          </div> 
+            <input type="submit" name="" value="Login">
+        </form> 
+        <a href="#">Forget Password<br> </a>
+        <div class="text-center">
+            <p style="color: #59238F;">Sign-Up</p>
+        </div>
+        
+    </div>
+</body>
+</html>
